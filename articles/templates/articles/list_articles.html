@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Liste des Articles
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Liste des Articles</h1>
+    {% for article in articles %}
+        <div class="mb-4 border-bottom pb-2">
+            {% if article.image %}
+                <img src="{{ article.image.url }}" alt="Image de {{ article.title }}" width="150" class="float-start me-3">
+            {% endif %}
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.summary }}</p>
+            <p class="text-muted">{{ article.date_pub }}</p>
+            <div>
+                <a href="{% url 'article_detail' article.id %}" class="btn btn-primary btn-sm">Lire plus</a>
+                <a href="{% url 'edit_article' article.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                <a href="{% url 'delete_article' article.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    {% empty %}
+        <p>Aucun article disponible.</p>
+    {% endfor %}
+{% endblock %}

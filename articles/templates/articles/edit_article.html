@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}  <!-- Charger les balises statiques ici -->
+
+{% block title %}
+    Modifier l'article
+{% endblock %}
+
+{% block content %}
+    <h1>Modifier l'article</h1>
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        <a href="{% url 'list_articles' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+{% endblock %}

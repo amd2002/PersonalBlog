@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier le profil{% endblock %}
+
+{% block content %}
+    <h1>Modifier votre profil</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Nom d'utilisateur</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="id_bio" class="form-label">Biographie</label>
+            {{ form.bio }}
+        </div>
+        <div class="mb-3">
+            <label for="id_avatar" class="form-label">Avatar</label>
+            {{ form.avatar }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    <p><strong>Date de publication :</strong> {{ article.date_pub }}</p>
+    {% if article.image %}
+        <img src="{{ article.image.url }}" alt="Image de {{ article.title }}" class="img-fluid mb-3">
+    {% endif %}
+    <div class="mt-3">
+        <p>{{ article.content }}</p>
+    </div>
+
+    <h2>Commentaires</h2>
+    {% for comment in comments %}
+        <div class="comment mb-3">
+            <strong>{{ comment.name }}</strong> <em>{{ comment.created_on|date:"F j, Y" }}</em>
+            <p>{{ comment.body }}</p>
+            <hr>
+        </div>
+    {% empty %}
+        <p>Il n'y a pas encore de commentaires.</p>
+    {% endfor %}
+
+    <h3>Laisser un commentaire</h3>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Nom</label>
+                {{ comment_form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                {{ comment_form.email }}
+            </div>
+            <div class="mb-3">
+                <label for="id_body" class="form-label">Commentaire</label>
+                {{ comment_form.body }}
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    {% else %}
+        <p>Veuillez <a href="{% url 'login' %}">vous connecter</a> pour commenter cet article.</p>
+    {% endif %}
+
+    <a href="{% url 'list_articles' %}" class="btn btn-secondary mt-3">Retour à la liste des articles</a>
+{% endblock %}

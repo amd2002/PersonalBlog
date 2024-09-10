@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}  <!-- Charger les balises statiques ici -->
+
+{% block title %}
+    Créer un article
+{% endblock %}
+
+{% block content %}
+    <h1>Créer un article</h1>
+    <form method="POST" enctype="multipart/form-data" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{% url 'list_articles' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+{% endblock %}

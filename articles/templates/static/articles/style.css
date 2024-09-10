@@ -1,0 +1,9 @@
+/* static/articles/style.css */
+
+body {
+    background-color: yellow; /* Test pour voir si le style s'applique bien */
+}
+:root {
+    --bs-blue: #0056b3; /* Change la couleur bleue par défaut à une autre nuance de bleu */
+}
+

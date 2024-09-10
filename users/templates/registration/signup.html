@@ -1,0 +1,15 @@
+{% extends 'base.html' %}  <!-- Utilise la structure de base (base.html) -->
+
+{% block title %}Inscription{% endblock %}  <!-- Titre de la page d'inscription -->
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Créer un compte</h2>
+        <form method="POST">
+            {% csrf_token %}  <!-- Jeton CSRF pour protéger le formulaire -->
+            {{ form.as_p }}  <!-- Affiche le formulaire généré par Django -->
+            <button type="submit" class="btn btn-primary">S'inscrire</button>  <!-- Bouton d'inscription -->
+        </form>
+        <p class="mt-3">Vous avez déjà un compte ? <a href="{% url 'login' %}">Connectez-vous ici</a>.</p>  <!-- Lien vers la page de connexion -->
+    </div>
+{% endblock %}
