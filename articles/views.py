@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Article, Comment  # Importation des modèles Article et Comment
-from .forms import ArticleForm, CommentForm  # Importation des formulaires
+from .models import Article
+from .forms import ArticleForm, CommentForm
 
 def list_article(request):
-    arts = Article.objects.all()  # Récupération de tous les articles
-    context = {'articles': arts}
-    return render(request, 'articles/list_articles.html', context)
+    articles = Article.objects.all()
+    return render(request, 'articles/list_articles.html', {'articles': articles})
 
 def create_article(request):
     if request.method == 'POST':

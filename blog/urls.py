@@ -1,16 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-
-from django.conf import settings
-from django.conf.urls.static import static
+from articles import views as article_views  # Importer les vues des articles
 
 urlpatterns = [
-    # Tes autres URL patterns ici...
     path('admin/', admin.site.urls),
-    path('articles/', include('articles.urls')),
-    path('users/', include('users.urls')), 
-     path('accounts/', include('django.contrib.auth.urls')), 
+    path('', article_views.list_article, name='home'),  # La racine redirige vers list_article
+    path('articles/', include('articles.urls')),  # Inclure les URLs de l'application articles
+    path('users/', include('users.urls')),  # Inclure les URLs de l'application users (si existante)
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
